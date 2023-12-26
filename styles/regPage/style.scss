@@ -1,0 +1,489 @@
+@import 'vars';
+@import 'mixins';
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 14px;
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    height: 100%;
+}
+
+summary {
+    display: block;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+.center {
+    padding-left: calc(50% - $widthSite / 2);
+    padding-right: calc(50% - $widthSite / 2);
+}
+
+.grid {
+    display: grid;
+}
+
+.header-h1 {
+    @include customText($titleAndBlockDarkColor, 3.42rem, 900, auto);
+
+}
+
+.header-h2 {
+    @include customText($titleAndBlockDarkColor, 2.28rem, 700, auto);
+}
+
+.header-h3 {
+    @include customText($colorSelectSite, 24px, 700, auto);
+}
+
+.header-h4 {
+    @include customText($colorForHeader4, 16px, 400, auto);
+}
+
+.header-h5 {
+    @include customText($titleAndBlockDarkColor, 30px, 400, auto);
+}
+
+.text {
+    @include customText($simpleTextColor, 14px, 400, auto);
+}
+
+.wrapper {
+    overflow-x: hidden;
+    height: 100%;
+    @include customFlex(column, auto, auto, auto);
+}
+
+.content {
+    flex: 1 0 auto;
+}
+
+// header block
+.header {
+    background-color: $titleAndBlockDarkColor;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    @include customFlex(row, space-between, center, nowrap);
+    position: relative;
+}
+
+.logo-search {
+    display: flex;
+    gap: 40px;
+
+    &>* {
+        color: $headerIconsColor;
+        font-size: 26px;
+        margin: auto;
+        -webkit-transition: all 1s ease;
+        transition: all 1s ease; 
+
+        &:hover {
+            color: $colorSelectSite;
+        }
+    }
+}
+
+.nav {
+    display: flex;
+    gap: 32px;
+
+    & i {
+        color: $headerIconsColor;
+        font-size: 26px;
+        margin: auto;
+        -webkit-transition: all 0.4s ease;
+        transition: all 0.4s ease; 
+
+        &:hover {
+            color: $colorSelectSite;
+        }
+    }
+}
+
+#burger {
+    position: absolute;
+    left: -999999px;
+    visibility: hidden;
+
+    &:checked ~ .burger__nav {
+        right: 0;
+    }    
+}
+
+.burger__nav {
+    background: $colorForHeader4;
+    box-shadow: 6px 4px 35px rgba(0, 0, 0, 0.21);
+    width: $widthBurgerMenu;
+    padding: 32px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 85px;
+    right: -$widthBurgerMenu;
+    transition: right .3s;
+}
+
+.burger-box {
+    position: relative;
+
+    &__close-btn {
+        position: absolute;
+        top: -24px;
+        right: -24px;
+    }
+
+    &__title {
+        @include customText($blackColor, 14px, 700, auto);
+        margin-bottom: 24px;
+    }
+
+    &__item {
+        margin-bottom: 16px;
+    }
+
+    &__item-summary {
+        @include customText($colorSelectSite, 14px, 700, auto);
+        -webkit-transition: all 0.3s ease;
+        transition: all 0.3s ease; 
+
+        &:hover {
+            text-shadow: 1px 1px 1px #000;
+        }
+    }
+
+    &__link-box {
+        @include customFlex(column, auto, auto, auto);
+        gap: 11px;
+        padding: 12px 22px;
+    }
+
+    &__item-link {
+        @include customText($filterLinksColor, 14px, 400, auto);
+
+        &:hover {
+            color: $colorSelectSite;
+        }
+    }
+}
+
+// top-head block
+.top-head {
+    background: #f8f3f4;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    margin-bottom: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    &__heading {
+        @include customText($colorSelectSite, 24px, 400, 29px);
+    }
+}
+
+// reg-content block
+.reg-box {
+    margin-top: 64px;
+    margin-bottom: 96px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 128px;
+}
+
+.reg-form {
+    @include customFlex(column, center, flex-start, nowrap);
+    gap: 24px;
+
+    &__title {
+        @include customText($titleAndBlockDarkColor, 16px, 300, auto);
+    }
+
+    &__input {
+        width: 100%;
+        padding: 8px 16px;
+        border: 1px solid $cartActionBtnColor;
+        box-sizing: border-box;
+
+        &::placeholder {
+            @include customText($placeholderColor, 13px, 300, auto);
+        }
+    }
+
+    &__sex-box {
+        display: flex;
+        gap: 20px;
+    }
+
+    &__ch-item {
+        display: flex;
+        gap: 10px;
+    }
+
+    &__psw-text {
+        @include customText($placeholderColor, 13px, 300, auto);
+    }
+
+    &__action-btn {
+        @include customText($colorForHeader4, 16px, 300, auto);
+        display: flex;
+        gap: 20px;
+        background-color: $colorSelectSite;
+        border: none;
+        padding: 1rem 2rem;
+
+        &:hover {
+            border: 1px solid #f16d7f;
+            color: #f16d7f;
+            background-color: #fff;
+        }
+    }
+}
+
+.loyalty-box {
+    @include customFlex(column, flex-start, flex-start, nowrap);
+    gap: 24px;
+
+    &__title {
+        @include customText($blackColor, 24px, 300, auto);
+    }
+
+    &__text {
+        @include customText($blackColor, 24px, 300, auto);
+    }
+
+    &__list {
+        @include customText($blackColor, 24px, 300, auto);
+        list-style: none;
+
+        & li {
+            padding-left: 40px;
+            position: relative;
+            margin-bottom: 16px;
+
+            &:before {
+                content: '✔';
+                position: absolute; top: 0; left: 0;
+                color: $blackColor;
+            }
+        }
+    }
+}
+
+// subscribe block
+.subscribe {
+    background: url(../../img/photo-subscribe.png) no-repeat center center fixed;
+    background-size: cover;
+    @include customFlex(row, space-around, center, nowrap);
+    padding-top: 96px;
+    padding-bottom: 120px;
+
+    &__info {
+        text-align: center;
+        float: left;
+        width: $halfOfTheSite;
+
+        &>p {
+            margin-top: 32px;
+            @include customText($titleAndBlockDarkColor, 20px, 400, auto);
+
+            & span {
+                font-style: italic;
+            }
+        }
+
+    }
+
+    &__action-container {
+        float: right;
+        width: $halfOfTheSite;
+        text-align: center;
+
+        &>h3 {
+            @include customText($titleAndBlockDarkColor, 24px, 700, 40px);
+        }
+
+        &>h4 {
+            @include customText($titleAndBlockDarkColor, 18px, 400, 40px);
+            margin-bottom: 32px;
+        }
+    }
+
+    &__action-field {
+        display: flex;
+    }
+
+    &__input {
+        height: 50px;
+        width: calc(100% - 100px);
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+        border: 1px solid $subscribeButtonColor;
+        background-color: $subscribeButtonColor;
+        padding: 0 24px;
+        box-sizing: border-box;
+    }
+
+    &__button {
+        height: 50px;
+        width: 100px;
+        line-height: 50px;
+        background-color: $colorSelectSite;
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: 25px;
+        @include customText($colorForHeader4, 14px, 400, auto);
+        box-sizing: border-box;
+
+        &:hover {
+            border: 1px solid $colorSelectSite;
+            color: $colorSelectSite;
+            background-color: $colorForHeader4;
+        }
+    }
+}
+
+// footer block
+.footer {
+    background-color: $titleAndBlockDarkColor;
+    @include customFlex(row, space-between, center, nowrap);
+    padding-top: 24px;
+    padding-bottom: 24px;
+    flex: 0 0 auto;
+}
+
+.copyright>p {
+    width: 332px;
+    color: #FBFBFB;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.social-icons {
+    @include customFlex(row, center, center, nowrap);
+    gap: 8px;
+}
+
+.social-icon {
+    height: 32px;
+    width: 32px;
+    background-color: $colorForHeader4;
+    @include customFlex(row, center, center, nowrap);
+
+    &:hover {
+        background-color: $colorSelectSite;
+        color: $colorForHeader4;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1400px) {
+    .center {
+        padding-left: calc(50% - 370px);
+        padding-right: calc(50% - 370px);
+    }
+
+    .header-h1 {
+        font-size: 44px;
+    }
+
+    .header-h2 {
+        font-size: 24px;
+    }
+
+    .subscribe {
+        flex-direction: column;
+        padding-bottom: 140px;
+        padding-top: 64px;
+    }
+
+    .subscribe-info {
+        margin-bottom: 48px;
+    }
+}
+
+@media (min-width: 375px) and (max-width: 767px) {
+
+    .only-desktop {
+        display: none;
+    }
+
+    .header-h1 {
+        font-size: 38px;
+    }
+
+    .header-h2 {
+        font-size: 20px;
+    }
+
+    .center {
+        padding-left: calc(50% - 160px);
+        padding-right: calc(50% - 160px);
+    }
+
+    // top-head block
+    .top-head {
+        justify-content: center;
+    }
+
+    // reg-content block
+    .reg-box {
+        grid-template-columns: repeat(1, 1fr);
+        grid-row-gap: 40px;
+    }
+
+    // subscribe block
+    .subscribe {
+        flex-direction: column;
+        padding-bottom: 110px;
+        padding-top: 64px;
+
+        &__info {
+            margin-bottom: 60px;
+            width: 97vw;
+
+            &>p {
+                font-size: 18px;
+            }
+        }
+
+        &__action-container>h4 {
+            font-size: 14px;
+            line-height: 14px;
+        }    
+
+        &__action-field {
+            justify-content: center;
+        }
+
+        &__input {
+            width: 64vw;
+        }
+
+        &__button {
+            padding-left: 7px;
+            padding-right: 7px;
+        }
+    }
+
+    // footer block
+    .footer {
+        flex-direction: column-reverse;
+    }
+
+    .copyright {
+        margin-top: 40px;
+        text-align: center;
+    }
+}

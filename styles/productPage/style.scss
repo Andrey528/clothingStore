@@ -1,0 +1,726 @@
+@import 'vars';
+@import 'mixins';
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 14px;
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    height: 100%;
+}
+
+summary {
+    display: block;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+sup{
+    font-size: 80%;
+    vertical-align: top;
+    position: relative;
+    top: 1px;
+  }
+
+.center {
+    padding-left: calc(50% - $widthSite / 2);
+    padding-right: calc(50% - $widthSite / 2);
+}
+
+.grid {
+    display: grid;
+}
+
+.header-h1 {
+    @include customText($titleAndBlockDarkColor, 3.42rem, 900, auto);
+
+}
+
+.header-h2 {
+    @include customText($titleAndBlockDarkColor, 2.28rem, 700, auto);
+}
+
+.header-h3 {
+    @include customText($colorSelectSite, 24px, 700, auto);
+}
+
+.header-h4 {
+    @include customText($colorForHeader4, 16px, 400, auto);
+}
+
+.header-h5 {
+    @include customText($titleAndBlockDarkColor, 30px, 400, auto);
+}
+
+.text {
+    @include customText($simpleTextColor, 14px, 400, auto);
+}
+
+.wrapper {
+    overflow-x: hidden;
+    height: 100%;
+    @include customFlex(column, auto, auto, auto);
+}
+
+.content {
+    flex: 1 0 auto;
+}
+
+// header block
+.header {
+    background-color: $titleAndBlockDarkColor;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    @include customFlex(row, space-between, center, nowrap);
+    position: relative;
+}
+
+.logo-search {
+    display: flex;
+    gap: 40px;
+
+    &>* {
+        color: $headerIconsColor;
+        font-size: 26px;
+        margin: auto;
+        -webkit-transition: all 1s ease;
+        transition: all 1s ease; 
+
+        &:hover {
+            color: $colorSelectSite;
+        }
+    }
+}
+
+.nav {
+    display: flex;
+    gap: 32px;
+
+    & i {
+        color: $headerIconsColor;
+        font-size: 26px;
+        margin: auto;
+        -webkit-transition: all 0.4s ease;
+        transition: all 0.4s ease; 
+
+        &:hover {
+            color: $colorSelectSite;
+        }
+    }
+}
+
+#burger {
+    position: absolute;
+    left: -999999px;
+    visibility: hidden;
+
+    &:checked ~ .burger__nav {
+        right: 0;
+    }    
+}
+
+.burger__nav {
+    background: $colorForHeader4;
+    box-shadow: 6px 4px 35px rgba(0, 0, 0, 0.21);
+    width: $widthBurgerMenu;
+    padding: 32px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 85px;
+    right: -$widthBurgerMenu;
+    transition: right .3s;
+}
+
+.burger-box {
+    position: relative;
+
+    &__close-btn {
+        position: absolute;
+        top: -24px;
+        right: -24px;
+    }
+
+    &__title {
+        @include customText($blackColor, 14px, 700, auto);
+        margin-bottom: 24px;
+    }
+
+    &__item {
+        margin-bottom: 16px;
+    }
+
+    &__item-summary {
+        @include customText($colorSelectSite, 14px, 700, auto);
+        -webkit-transition: all 0.3s ease;
+        transition: all 0.3s ease; 
+
+        &:hover {
+            text-shadow: 1px 1px 1px #000;
+        }
+    }
+
+    &__link-box {
+        @include customFlex(column, auto, auto, auto);
+        gap: 11px;
+        padding: 12px 22px;
+    }
+
+    &__item-link {
+        @include customText($filterLinksColor, 14px, 400, auto);
+
+        &:hover {
+            color: $colorSelectSite;
+        }
+    }
+}
+
+// top-head block
+.top-head {
+    background: #f8f3f4;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__heading {
+        @include customText($colorSelectSite, 24px, 400, 29px);
+    }
+}
+
+.breadcrumbs {
+    &__ul {
+        list-style-type: none;
+        display: flex;
+    }
+
+    &__li:not(:last-child)::after {
+        content: '/';
+        padding-left: 8px;
+        padding-right: 8px;
+        @include customText($breadcrumbsLinkColor, 14px, 300, 17px);
+    }
+
+    &__li:last-child .breadcrumbs__link {
+        font-weight: 700;
+        color: $colorSelectSite;
+    }
+
+    &__link {
+        @include customText($breadcrumbsLinkColor, 14px, 300, 17px);
+        transition: all 0.4s ease; 
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+// main block
+.main-block {
+    position: relative;
+    background-color: $productMainBlockColor;
+    width: 100%;
+    @include customFlex(column, center, center, nowrap);
+
+    &__nav {
+        position: absolute;
+        top: 50%;
+        @include customText($blackColor, 32px, 300, auto);
+        background-color: $simpleTextColor;
+        width: 48px;
+        height: 48px;
+        @include customFlex(row, center, center, nowrap);
+        transition: all 0.4s ease; 
+
+        &:hover {
+            color: $colorSelectSite;
+        }
+    }
+
+    &__left {
+        left: 0;
+    }
+
+    &__right {
+        right: 0;
+    }
+
+    &__white-box {
+        position: absolute;
+        height: 64px;
+        width: calc($widthSite - 2px);
+        background-color: $colorForHeader4;
+        bottom: 0;
+        border-left: 1px solid $cartLineColor;
+        border-right: 1px solid $cartLineColor;
+        border-top: 1px solid $cartLineColor;
+    }
+}
+
+// cart block
+.cart {
+    margin-bottom: 128px;
+    @include customFlex(column, auto, center, auto);
+    margin-left: calc(50% - $widthSite / 2);
+    margin-right: calc(50% - $widthSite / 2);
+    border-left: 1px solid $cartLineColor;
+    border-right: 1px solid $cartLineColor;
+    border-bottom: 1px solid $cartLineColor;
+
+    &__order {
+        width: 640px;
+    }
+
+    &__desc {
+        @include customFlex(column, center, auto, auto);
+        padding-left: 40px;
+        padding-right: 40px;
+        text-align: center;
+        border-bottom: 1px solid $cartLineColor;
+        margin-bottom: 64px;
+    }
+
+    &__teg-box {
+        padding-bottom: 16px;
+        position: relative;
+        margin-bottom: 16px;
+
+        &:after {
+            content: " ";
+            background: $colorSelectSite;
+            width: 64px;
+            height: 3px;
+            position: absolute;
+            bottom: 0;
+            left: calc(50% - 32px);
+        }
+    }
+
+    &__teg-link {
+        @include customText($colorSelectSite, 14px, 300, auto);
+    }
+
+    &__title-box {
+        margin-bottom: 48px;
+    }
+
+    &__title-header {
+        @include customText($cartTitleColor, 18px, 300, auto);
+    }
+
+    &__text-box {
+        margin-bottom: 32px;
+    }
+
+    &__text-p {
+        @include customText($cartPtext, 14px, 300, auto);
+    }
+
+    &__price-box {
+        margin-bottom: 64px;
+        @include customText($colorSelectSite, 24px, 300, auto);
+    }
+
+    &__params {
+        margin-bottom: 64px;
+    }
+
+    &__action-block {
+        @include customFlex(row, center, center, auto);
+    }
+
+    &__order-product {
+        @include customFlex(row, center, center, auto);
+        gap: 24px;
+        @include customText($colorSelectSite, 16px, 400, auto);
+        border: 1px solid $colorSelectSite;
+        padding: 1rem 2rem;
+    
+        &:hover {
+            color: $colorForHeader4;
+            background-color: $colorSelectSite;
+        }
+    }
+}
+
+.params {
+    padding-top: 12px;
+    @include customFlex(row, center, auto, nowrap);
+    gap: 18px;
+    margin-bottom: 48px;
+
+    &__details {
+        position: relative;
+    }
+
+    &__summary {
+        @include customFlex(row, auto, center, nowrap);
+        gap: 10px;
+
+        &:hover i, &:hover .params__heading {
+            color: $colorSelectSite;
+        }
+    }
+
+    &__check {
+        @include customFlex(row, auto, center, nowrap);
+        gap: 9px;
+        @include customText($filterLinksColor, 14px, 400, 16px);
+        transition: all 0.4s ease; 
+
+        &:hover {
+            text-decoration: underline;
+            color: $colorSelectSite;
+        }     
+    }
+
+
+    &__heading {
+        @include customText($filterLinksColor, 14px, 400, 17px);
+        white-space: nowrap;
+    }
+
+    & i {
+        color: $filterLinksColor;
+    }
+
+    &__box {
+        z-index: 1;
+        background: $colorForHeader4;
+        box-shadow: 6px 4px 35px rgba(0, 0, 0, 0.21);
+        padding: 7px 30px 11px 9px;
+        position: absolute;
+        right: 0;
+        top: 22px;
+        @include customFlex(column, auto, auto, nowrap);
+        gap: 8px;
+    }
+
+    &__quantity-value {
+        @include customText($filterLinksColor, 16px, 400, auto);
+        text-align: center;
+    }
+}
+
+// product block
+.product-box {
+    padding-bottom: 96px;
+
+    &__content {
+        @include customFlex(row, center, center, wrap);
+        gap: $gapGrid;
+        padding-bottom: 48px;
+    }    
+}
+
+.product {
+    width: $thirdPartOfSite;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    &:hover {
+        box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.21);
+
+        & .product__img {
+            filter: brightness(30%);
+        }
+
+        & .product__add-box {
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    &__img-box {
+        position: relative;
+        width: 100%;
+    }
+    
+    &__img {
+        width: 100%;
+    }
+
+    &__add-box {
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        display: none;
+        pointer-events: none;
+
+        & i {
+            color: $colorForHeader4;
+        }
+    }
+
+    &__add {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 1rem 2rem;
+        border: 1px solid $colorForHeader4;
+        pointer-events: all;
+
+        &:hover {
+            box-shadow: 0px 0px 8px 0px $colorForHeader4;
+        }
+    }
+
+    &__add-text {
+        @include customText($colorForHeader4, 14px, 400, auto);
+    }
+
+    &__content {
+        background-color: $productContentBackground;
+        padding: 24px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    &__name {
+        @include customText($blackColor, 13px, 400, 16px);
+    }
+
+    &__text {
+        @include customText($productTextColor, 14px, 300, 17px);
+    }
+
+    &__price {
+        @include customText($colorSelectSite, 16px, 400, 19px);
+
+    } 
+}
+
+// subscribe block
+.subscribe {
+    background: url(../../img/photo-subscribe.png) no-repeat center center fixed;
+    background-size: cover;
+    @include customFlex(row, space-around, center, nowrap);
+    padding-top: 96px;
+    padding-bottom: 120px;
+
+    &__info {
+        text-align: center;
+        float: left;
+        width: $halfOfTheSite;
+
+        &>p {
+            margin-top: 32px;
+            @include customText($titleAndBlockDarkColor, 20px, 400, auto);
+
+            & span {
+                font-style: italic;
+            }
+        }
+
+    }
+
+    &__action-container {
+        float: right;
+        width: $halfOfTheSite;
+        text-align: center;
+
+        &>h3 {
+            @include customText($titleAndBlockDarkColor, 24px, 700, 40px);
+        }
+
+        &>h4 {
+            @include customText($titleAndBlockDarkColor, 18px, 400, 40px);
+            margin-bottom: 32px;
+        }
+    }
+
+    &__action-field {
+        display: flex;
+    }
+
+    &__input {
+        height: 50px;
+        width: calc(100% - 100px);
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+        border: 1px solid $subscribeButtonColor;
+        background-color: $subscribeButtonColor;
+        padding: 0 24px;
+        box-sizing: border-box;
+    }
+
+    &__button {
+        height: 50px;
+        width: 100px;
+        line-height: 50px;
+        background-color: $colorSelectSite;
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: 25px;
+        @include customText($colorForHeader4, 14px, 400, auto);
+        box-sizing: border-box;
+
+        &:hover {
+            border: 1px solid $colorSelectSite;
+            color: $colorSelectSite;
+            background-color: $colorForHeader4;
+        }
+    }
+}
+
+// footer block
+.footer {
+    background-color: $titleAndBlockDarkColor;
+    @include customFlex(row, space-between, center, nowrap);
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
+.copyright>p {
+    width: 332px;
+    color: #FBFBFB;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.social-icons {
+    @include customFlex(row, center, center, nowrap);
+    gap: 8px;
+}
+
+.social-icon {
+    height: 32px;
+    width: 32px;
+    background-color: $colorForHeader4;
+    @include customFlex(row, center, center, nowrap);
+
+    &:hover {
+        background-color: $colorSelectSite;
+        color: $colorForHeader4;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1400px) {
+    .only-desktop {
+        display: none;
+    }
+
+    .center {
+        padding-left: calc(50% - 370px);
+        padding-right: calc(50% - 370px);
+    }
+
+    .header-h1 {
+        font-size: 44px;
+    }
+
+    .header-h2 {
+        font-size: 24px;
+    }
+
+    .cart {
+        margin-top: 64px;
+    }
+
+    .product-box__content {
+        flex-wrap: nowrap;
+    }
+
+    .subscribe {
+        flex-direction: column;
+        padding-bottom: 140px;
+        padding-top: 64px;
+    }
+
+    .subscribe-info {
+        margin-bottom: 48px;
+    }
+}
+
+@media (min-width: 375px) and (max-width: 767px) {
+    .only-desktop {
+        display: none;
+    }
+
+    .header-h1 {
+        font-size: 38px;
+    }
+
+    .header-h2 {
+        font-size: 20px;
+    }
+
+    .center {
+        padding-left: calc(50% - 343px / 2);
+        padding-right: calc(50% - 343px / 2);
+    }
+
+    // top-head block
+    .top-head {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 32px;
+    }
+
+    .cart {
+        margin-top: 64px;
+
+        &__order {
+            width: 360px;
+        }
+    }
+
+    // subscribe block
+    .subscribe {
+        flex-direction: column;
+        padding-bottom: 110px;
+        padding-top: 64px;
+
+        &__info {
+            margin-bottom: 60px;
+            width: 97vw;
+
+            &>p {
+                font-size: 18px;
+            }
+        }
+
+        &__action-container>h4 {
+            font-size: 14px;
+            line-height: 14px;
+        }    
+
+        &__action-field {
+            justify-content: center;
+        }
+
+        &__input {
+            width: 64vw;
+        }
+
+        &__button {
+            padding-left: 7px;
+            padding-right: 7px;
+        }
+    }
+
+    // footer block
+    .footer {
+        flex-direction: column-reverse;
+    }
+
+    .copyright {
+        margin-top: 40px;
+        text-align: center;
+    }
+}

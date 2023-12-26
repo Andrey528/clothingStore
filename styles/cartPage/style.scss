@@ -1,0 +1,686 @@
+@import 'vars';
+@import 'mixins';
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 14px;
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    height: 100%;
+}
+
+summary {
+    display: block;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+.center {
+    padding-left: calc(50% - $widthSite / 2);
+    padding-right: calc(50% - $widthSite / 2);
+}
+
+.header-h1 {
+    @include customText($titleAndBlockDarkColor, 3.42rem, 900, auto);
+}
+
+.header-h2 {
+    @include customText($titleAndBlockDarkColor, 2.28rem, 700, auto);
+}
+
+.header-h3 {
+    @include customText($colorSelectSite, 24px, 700, auto);
+}
+
+.header-h4 {
+    @include customText($colorForHeader4, 16px, 400, auto);
+}
+
+.header-h5 {
+    @include customText($titleAndBlockDarkColor, 30px, 400, auto);
+}
+
+.text {
+    @include customText($simpleTextColor, 14px, 400, auto);
+}
+
+.wrapper {
+    overflow-x: hidden;
+    height: 100%;
+    @include customFlex(column, auto, auto, auto);
+}
+
+.content {
+    flex: 1 0 auto;
+}
+
+// header block
+.header {
+    background-color: $titleAndBlockDarkColor;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    @include customFlex(row, space-between, center, nowrap);
+    position: relative;
+}
+
+.logo-search {
+    display: flex;
+    gap: 40px;
+
+    &>* {
+        color: $headerIconsColor;
+        font-size: 26px;
+        margin: auto;
+        -webkit-transition: all 1s ease;
+        transition: all 1s ease; 
+
+        &:hover {
+            color: $colorSelectSite;
+        }
+    }
+}
+
+.nav {
+    display: flex;
+    gap: 32px;
+
+    & i {
+        color: $headerIconsColor;
+        font-size: 26px;
+        margin: auto;
+        -webkit-transition: all 0.4s ease;
+        transition: all 0.4s ease; 
+
+        &:hover {
+            color: $colorSelectSite;
+        }
+    }
+}
+
+#burger {
+    position: absolute;
+    left: -999999px;
+    visibility: hidden;
+
+    &:checked ~ .burger__nav {
+        right: 0;
+    }    
+}
+
+.burger__nav {
+    background: $colorForHeader4;
+    box-shadow: 6px 4px 35px rgba(0, 0, 0, 0.21);
+    width: $widthBurgerMenu;
+    padding: 32px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 85px;
+    right: -$widthBurgerMenu;
+    transition: right .3s;
+}
+
+.burger-box {
+    position: relative;
+
+    &__close-btn {
+        position: absolute;
+        top: -24px;
+        right: -24px;
+    }
+
+    &__title {
+        @include customText($blackColor, 14px, 700, auto);
+        margin-bottom: 24px;
+    }
+
+    &__item {
+        margin-bottom: 16px;
+    }
+
+    &__item-summary {
+        @include customText($colorSelectSite, 14px, 700, auto);
+        -webkit-transition: all 0.3s ease;
+        transition: all 0.3s ease; 
+
+        &:hover {
+            text-shadow: 1px 1px 1px #000;
+        }
+    }
+
+    &__link-box {
+        @include customFlex(column, auto, auto, auto);
+        gap: 11px;
+        padding: 12px 22px;
+    }
+
+    &__item-link {
+        @include customText($filterLinksColor, 14px, 400, auto);
+
+        &:hover {
+            color: $colorSelectSite;
+        }
+    }
+}
+
+// top-head block
+.top-head {
+    background: #f8f3f4;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    margin-bottom: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    &__heading {
+        @include customText($colorSelectSite, 24px, 400, 29px);
+    }
+}
+
+//cart-content block
+.cart-order {
+    margin-top: 96px;
+    margin-bottom: 128px;
+}
+
+.cart-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 128px;
+
+    &__products-box {
+        grid-column: span 2;
+    }
+
+    &__products {
+        @include customFlex(column, space-between, center, nowrap);
+        gap: 40px;
+        margin-bottom: 72px;
+    }
+
+    &__actions-field {
+        @include customFlex(row, space-between, center, nowrap);
+    }
+
+    &__action-btn {
+        @include customText($cartActionBtnColor, 14px, 300, auto);
+        border: 1px solid $cartActionBtnColor;
+        padding: 1rem 2rem;
+    
+        &:hover {
+            color: $colorForHeader4;
+            background-color: $colorSelectSite;
+        }
+    }
+
+    &__shipping {
+        @include customFlex(column, center, center, nowrap);
+        gap: 56px;
+    }
+}
+
+.product {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(1, $productHeight);
+    position: relative;
+    box-shadow: 6px 4px 35px rgba(0, 0, 0, 0.21);    
+    &__img {
+        height: 100%;
+    }
+
+    &__info {
+        grid-column: span 2;
+        @include customFlex(column, auto, flex-start, wrap);
+        padding: 32px 24px;
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;
+
+    }
+
+    &__params {
+        flex-grow: 1;
+        @include customFlex(column, center, flex-start, nowrap);
+        gap: 8px;
+
+        & h4 {
+            display: inline-block;
+            @include customText($breadcrumbsLinkColor, 22px, 400, auto);
+            margin-right: 8px;
+        }
+
+        & span:not(.price__value) {
+            @include customText($filterLinksColor, 22px, 400, auto);
+        }
+    }
+
+    &__delete-btn {
+        position: absolute;
+        top: 32px;
+        right: 32px;
+
+        & i {
+            color: $breadcrumbsLinkColor;
+            font-size: 18px;
+            transition: all 0.3s ease; 
+
+            &:hover {
+                color: $colorSelectSite;
+            }
+        }
+    }
+}
+
+.price__value {
+    @include customText($colorSelectSite, 22px, 400, auto);
+}
+
+.quantity__value {
+    width: 100px;
+    @include customText($filterLinksColor, 22px, 400, auto);
+    text-align: center;
+}
+
+.shipping {
+    &__title {
+        @include customText($titleAndBlockDarkColor, 16px, 300, auto);
+    }
+
+    &__addres {
+        @include customFlex(column, center, flex-start, nowrap);
+        gap: 20px;
+        width: 100%;
+
+        & input {
+            width: 100%;
+            padding: 8px 16px;
+            border: 1px solid $cartActionBtnColor;
+            box-sizing: border-box;
+
+            &::placeholder {
+                @include customText($placeholderColor, 13px, 300, auto);
+            }
+        }
+    }
+
+    &__action-btn {
+        @include customText($cartActionBtnColor, 11px, 300, auto);
+        border: 1px solid $cartActionBtnColor;
+        padding: 1rem 2rem;
+    
+        &:hover {
+            color: $colorForHeader4;
+            background-color: $colorSelectSite;
+        } 
+    }
+
+    &__checkout {
+        background: $cartCheckoutColor;
+        padding: 40px;
+    }
+
+    &__amount {
+        @include customFlex(column, center, flex-end, nowrap);
+        gap: 16px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid $cartAmountBorder;
+        margin-bottom: 16px;
+    }
+}
+
+.sub-total {
+    &__box {
+        @include customFlex(row, center, center, nowrap);
+        gap: 16px;
+
+        & span {
+            @include customText($subTotalColor, 11px, 400, auto);
+        }
+    }
+
+    &__title {
+        @include customText($subTotalColor, 11px, 400, auto);
+    }
+}
+
+.grand-total {
+    &__box {
+        @include customFlex(row, center, center, nowrap);
+        gap: 16px;
+
+        & span {
+            @include customText($colorSelectSite, 16px, 700, auto);
+        }
+    }
+
+    &__title {
+        @include customText($titleAndBlockDarkColor, 16px, 300, auto);
+    }
+}
+
+.checkout {
+    &__action-btn {
+        @include customText($colorForHeader4, 16px, 300, auto);
+        background-color: $colorSelectSite;
+        border: none;
+        padding: 1rem 2rem;
+
+        &:hover {
+            border: 1px solid #f16d7f;
+            color: #f16d7f;
+            background-color: #fff;
+        }
+    }
+}
+
+// subscribe block
+.subscribe {
+    background: url(../../img/photo-subscribe.png) no-repeat center center fixed;
+    background-size: cover;
+    @include customFlex(row, space-around, center, nowrap);
+    padding-top: 96px;
+    padding-bottom: 120px;
+
+    &__info {
+        text-align: center;
+        float: left;
+        width: $halfOfTheSite;
+
+        &>p {
+            margin-top: 32px;
+            @include customText($titleAndBlockDarkColor, 20px, 400, auto);
+
+            & span {
+                font-style: italic;
+            }
+        }
+
+    }
+
+    &__action-container {
+        float: right;
+        width: $halfOfTheSite;
+        text-align: center;
+
+        &>h3 {
+            @include customText($titleAndBlockDarkColor, 24px, 700, 40px);
+        }
+
+        &>h4 {
+            @include customText($titleAndBlockDarkColor, 18px, 400, 40px);
+            margin-bottom: 32px;
+        }
+    }
+
+    &__action-field {
+        display: flex;
+    }
+
+    &__input {
+        height: 50px;
+        width: calc(100% - 100px);
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+        border: 1px solid $subscribeButtonColor;
+        background-color: $subscribeButtonColor;
+        padding: 0 24px;
+        box-sizing: border-box;
+    }
+
+    &__button {
+        height: 50px;
+        width: 100px;
+        line-height: 50px;
+        background-color: $colorSelectSite;
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: 25px;
+        @include customText($colorForHeader4, 14px, 400, auto);
+        box-sizing: border-box;
+
+        &:hover {
+            border: 1px solid $colorSelectSite;
+            color: $colorSelectSite;
+            background-color: $colorForHeader4;
+        }
+    }
+}
+
+// footer block
+.footer {
+    background-color: $titleAndBlockDarkColor;
+    @include customFlex(row, space-between, center, nowrap);
+    padding-top: 24px;
+    padding-bottom: 24px;
+    flex: 0 0 auto;
+}
+
+.copyright>p {
+    width: 332px;
+    color: #FBFBFB;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.social-icons {
+    @include customFlex(row, center, center, nowrap);
+    gap: 8px;
+}
+
+.social-icon {
+    height: 32px;
+    width: 32px;
+    background-color: $colorForHeader4;
+    @include customFlex(row, center, center, nowrap);
+
+    &:hover {
+        background-color: $colorSelectSite;
+        color: $colorForHeader4;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1400px) {
+    .center {
+        padding-left: calc(50% - 370px);
+        padding-right: calc(50% - 370px);
+    }
+
+    .header-h1 {
+        font-size: 44px;
+    }
+
+    .header-h2 {
+        font-size: 24px;
+    }
+
+    .cart-content {
+        grid-template-columns: repeat(1, 1fr);
+        grid-column-gap: 0;
+        grid-row-gap: 64px;
+
+        &__products-box {
+            grid-column: span 2;
+        }
+
+        &__shipping {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+
+    .shipping__addres {
+        width: 45%;
+    }
+
+    .subscribe {
+        flex-direction: column;
+        padding-bottom: 140px;
+        padding-top: 64px;
+    }
+
+    .subscribe-info {
+        margin-bottom: 48px;
+    }
+}
+
+@media (min-width: 375px) and (max-width: 767px) {
+
+    .only-desktop {
+        display: none;
+    }
+
+    .header-h1 {
+        font-size: 38px;
+    }
+
+    .header-h2 {
+        font-size: 20px;
+    }
+
+    .center {
+        padding-left: calc(50% - 160px);
+        padding-right: calc(50% - 160px);
+    }
+
+    // top-head block
+    .top-head {
+        justify-content: center;
+    }
+
+    // cart order block
+    .cart-content {
+        grid-template-columns: repeat(1, 1fr);
+        grid-column-gap: 0;
+        grid-row-gap: 48px;
+
+        &__products-box {
+            grid-column: span 1;
+        }
+
+        &__shipping {
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        &__action-btn {
+            font-size: 12px;
+            padding: 0.5rem 1rem;
+        }
+    }
+
+    .product {
+        grid-template-columns: repeat(3, 100px);
+        grid-template-rows: repeat(1, 150px);
+
+        &__img {
+            width: 100%;
+            height: 100%;
+        }
+
+        &__info {
+            padding: 8px;
+        }
+
+        &__title {
+            @include customText($titleAndBlockDarkColor, 16px, 400, auto);
+            margin-right: 32px;
+        }
+        
+        &__params {
+    
+            & h4 {
+                @include customText($breadcrumbsLinkColor, 14px, 400, auto);
+            }
+
+            & span:not(.price__value) {
+                @include customText($filterLinksColor, 14px, 400, auto);
+            }
+        }
+
+        &__delete-btn {
+            top: 8px;
+            right: 8px;
+        }
+    }
+
+    .price__value {
+        @include customText($colorSelectSite, 14px, 400, auto);
+    }
+    
+    .quantity__value {
+        width: 100px;
+        @include customText($filterLinksColor, 14px, 400, auto);
+        text-align: center;
+    }
+
+    .shipping {
+        &__addres {
+            width: 1fr;
+
+            & input {
+                width: 100%;
+            }
+        }
+
+        &__checkout {
+            padding: 16px;
+        }
+    }
+
+    // subscribe block
+    .subscribe {
+        flex-direction: column;
+        padding-bottom: 110px;
+        padding-top: 64px;
+
+        &__info {
+            margin-bottom: 60px;
+            width: 97vw;
+
+            &>p {
+                font-size: 18px;
+            }
+        }
+
+        &__action-container>h4 {
+            font-size: 14px;
+            line-height: 14px;
+        }    
+
+        &__action-field {
+            justify-content: center;
+        }
+
+        &__input {
+            width: 64vw;
+        }
+
+        &__button {
+            padding-left: 7px;
+            padding-right: 7px;
+        }
+    }
+
+    // footer block
+    .footer {
+        flex-direction: column-reverse;
+    }
+
+    .copyright {
+        margin-top: 40px;
+        text-align: center;
+    }
+}
